@@ -1,0 +1,57 @@
+// Media Queries
+@mixin atSmall {
+  @media (min-width: 375px) {
+    @content;
+  }
+}
+
+@mixin atMedium {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin atLarge {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin atExtraLarge {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin atLargeHeight {
+  @media (min-height: 820px) {
+    @content;
+  }
+}
+
+// Fonts
+@mixin font-300 {
+  font-weight: $o-font-weight-light;
+}
+
+@mixin font-400 {
+  font-weight: $o-font-weight-normal;
+}
+
+@mixin font-400-italic {
+  font-weight: $o-font-weight-normal;
+  font-style: italic;
+}
+
+@mixin font-500 {
+  font-weight: $o-font-weight-medium;
+}
+
+@mixin font-500-italic {
+  font-weight: $o-font-weight-medium;
+  font-style: italic;
+}
+
+@mixin font-700 {
+  font-weight: $o-font-weight-bold;
+}
