@@ -1,0 +1,99 @@
+.tab {
+  width: 100%;
+  background: #ffffff;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 0.375em;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0, rgba(27, 31, 35, 0.15) 0 0 0 1px;
+
+  &__title {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 100%;
+
+    @include atLarge {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  &__nav {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding-right: 15px;
+    padding-bottom: 1em;
+    overflow: auto;
+    white-space: nowrap;
+
+
+    @include atLarge {
+      flex: 0 0 25%;
+      max-width: 25%;
+      padding-bottom: 0;
+      overflow: visible;
+    }
+  }
+
+  &__content {
+    flex: 0 0 100%;
+    max-width: 100%;
+
+    @include atLarge {
+      flex: 0 0 75%;
+      max-width: 75%;
+    }
+  }
+
+  &__nav-item {
+    display: inline-block;
+    font-size: 1em;
+    font-weight: normal;
+    color: #5b5454;
+    text-decoration: none;
+    padding: 0 1em 0.5em 1em;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    @include atLarge {
+      border-radius: 6px;
+      display: block;
+      padding: .85em 1em;
+    }
+  }
+
+  &__nav-item--active {
+    color: #000;
+    position: relative;
+    border-bottom: 2px solid;
+
+    &:before {
+      @include atLarge {
+        content: "";
+        background-color: rgb(43, 80, 194);
+        position: absolute;
+        top: 0;
+        left: -15px;
+        width: 5px;
+        height: 100%;
+        border-radius: 0 0.25em 0.25em 0;
+      }
+
+      @include atLarge {
+        border-bottom: 0;
+      }
+    }
+
+    @include atLarge {
+      color: #1894c9;
+      background: rgb(241, 248, 254);
+    }
+  }
+}
