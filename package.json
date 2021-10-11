@@ -14,5 +14,8 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "gulp-usemin": "^0.3.30"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.3"
   }
 }
