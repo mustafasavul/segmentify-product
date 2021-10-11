@@ -28,30 +28,3 @@
     @content;
   }
 }
-
-// Fonts
-@mixin font-300 {
-  font-weight: $o-font-weight-light;
-}
-
-@mixin font-400 {
-  font-weight: $o-font-weight-normal;
-}
-
-@mixin font-400-italic {
-  font-weight: $o-font-weight-normal;
-  font-style: italic;
-}
-
-@mixin font-500 {
-  font-weight: $o-font-weight-medium;
-}
-
-@mixin font-500-italic {
-  font-weight: $o-font-weight-medium;
-  font-style: italic;
-}
-
-@mixin font-700 {
-  font-weight: $o-font-weight-bold;
-}

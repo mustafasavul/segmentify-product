@@ -1,3 +1,6 @@
+// Vendors
+@import "node_modules/bootstrap/scss/bootstrap-grid";
+
 // Base
 @import "base/variables";
 @import "base/mixins";
@@ -12,4 +15,5 @@
 @import "modules/card";
 @import "modules/tab";
 @import "modules/c-swiper";
+@import "modules/notification";
 

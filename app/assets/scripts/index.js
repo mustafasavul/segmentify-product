@@ -1,67 +1,99 @@
-const bigData = [];
+// Lazy Load Init
+const observer = lozad();
+observer.observe();
 
+const sBetween = 16;
+const recommendsProducts = [];
+
+// Get Data
 async function fetchText() {
-  let response = await fetch('./assets/data/product-list.json');
-  let data = await response.json();
-  bigData.push(data);
+  let userCategories = [];
+  let recommendedProducts = [];
+
+  return new Promise(async (resolve, reject) => {
+    let response = await fetch('./assets/data/product-list.json');
+    let data = await response.json();
+
+    userCategories = data.responses[0][0].params.userCategories
+    recommendedProducts = data.responses[0][0].params.recommendedProducts
+
+    recommendsProducts.push(data.responses[0][0].params.recommendedProducts)
+
+    resolve({
+      userCategories,
+      recommendedProducts
+    })
+  });
 }
 
-fetchText();
+// Handle Data
+fetchText().then((resp) => {
+  resp.userCategories.forEach(item => {
+    let nav = document.createElement('a')
+    nav.setAttribute("href", "javascript:");
+    nav.setAttribute("onClick", "getNavItem(event)");
+    nav.setAttribute("data-value", item.name);
+    nav.classList.add('tab__nav-item')
+    nav.innerText = `${item.name.slice(0, 30)}`
 
-console.log(bigData)
-//
-// const add = (a, b) => a + b;
-//
-// function getRatingsAverage(ratings) {
-//   return ratings.reduce(add) / ratings.length;
-// }
-//
-// // loop through the data
-// data.forEach((datarecord, idx) => {
-//   let markup = createSeries(datarecord, idx);
-//   let container = document.createElement("div");
-//   container.classList.add("a-Series");
-//   container.innerHTML = markup;
-//   document.body.appendChild(container);
-// });
-//
-// function createSeries(datarecord, idx) {
-//   return `
-//     <h2 class="a-Series_Title">${datarecord.Title}</h2>
-//     <p class="a-Series_Description">
-//       <span class="a-Series_DescriptionHeader">Description: </span>${datarecord.Description}
-//     </p>
-// <h4 class="a-EpisodeBlock_Title">First episodes</h4>
-// <ul class="a-EpisodeBlock">
-// 	<li class="a-EpisodeBlock_Item">
-//
-//       ${datarecord.Episodes.map((episode, index) =>
-//     `
-//
-//             <span class="a-EpisodeBlock_Title"><b class="a-EpisodeBlock_EpisodeNo">${index + 1}</b> ${episode}</span>
-//
-//         `
-//   ).join("")}
-//
-//
-//     </li>
-// 	${datarecord.Ended === true ? `` : `<div class="a-Series_More">More to come!</div>`}
-// </ul>
-// <h4 class="a-ReviewsBlock_Title">Reviews</h4>
-// 	<ul class="a-ReviewsBlock">
-//
-// ${datarecord.Reviews.map(review =>
-//     `<li class="a-ReviewsBlock_Origin">
-//             <b class="a-ReviewsBlock_Reviewer">${Object.keys(review)[0]}</b>
-//             <span class="a-ReviewsBlock_Score">${review[Object.keys(review)[0]]}%</span>
-//         </li>
-//         `
-//   ).join("")}
-// 	</ul>
-// 	<div class="a-UserRating">Average user rating: <b class="a-UserRating_Score">${getRatingsAverage(datarecord.UserRatings)}</b></div>
-// `;
-// }
+    document.getElementById('userCategories').appendChild(nav);
+  })
+}).catch(err => { console.log(err) });
 
+const sliderTemplate = ''
+const filterCategoryName = [];
+
+/***
+ * @params: event
+ * */
+function getNavItem(event) {
+  document.querySelectorAll('.tab__nav-item').forEach(function (button, index) {
+    button.classList.remove('tab__nav-item--active');
+  });
+
+  event.target.classList.add('tab__nav-item--active')
+
+  recommendsProducts.forEach(item => {
+    let sliderInner = document.getElementById('sliderData');
+
+    // Empty Content
+    sliderInner.innerHTML = '';
+
+    let freeCargo = "<div class=\"card__cargo\"><img src=\"assets/images/icons/cargo.svg\" alt=\"Hızlı Kargo\"><span>Ücretsiz Kargo</span></div>\n"
+
+    for (let value of Object.values(item[event.target.dataset.value])) {
+      let card = `
+             <div class="swiper-slide">
+              <div class="card">
+              <div class="card__image">
+                <img src="${value.image}" data-src="${value.image}" alt="${value.name.slice(0, 25)}">
+
+              </div>
+
+              <div class="card__info">
+                <h2 class="card__title">${value.name}</h2>
+
+                <div class="card__price">
+                  ${value.priceText}
+                </div>
+
+              ${value.params.shippingFee === "FREE" ? freeCargo : ''}
+
+              <a href="javascript:" class="card__basket">
+              Sepete Ekle
+              </a>
+              </div>
+          </div>
+        </div>
+    `
+      let product = document.createElement('a')
+      product.classList.add('swiper-slide')
+      product.innerText = `${item.name}`
+      product.innerHTML = card;
+      sliderInner.appendChild(product);
+    }
+  })
+}
 
 const swiper = new Swiper('.swiper', {
   // Optional parameters
@@ -71,7 +103,24 @@ const swiper = new Swiper('.swiper', {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
   },
-  slidesPerView: 4,
-  spaceBetween: 16,
-  freeMode: true,
+  slidesPerView: 2,
+  spaceBetween: sBetween,
+  breakpoints: {
+    480: {
+      slidesPerView: 2,
+      spaceBetween: sBetween,
+    },
+    640: {
+      slidesPerView: 2,
+      spaceBetween: sBetween,
+    },
+    768: {
+      slidesPerView: 3,
+      spaceBetween: sBetween,
+    },
+    1024: {
+      slidesPerView: 4,
+      spaceBetween: sBetween,
+    },
+  },
 });
