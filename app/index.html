@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<main>
+<main class="home">
   <div class="container">
     <!-- tab -->
     <div class="tab">
@@ -51,7 +51,7 @@
                     <div class="card__cargo"><img src="assets/images/icons/cargo.svg" alt="Hızlı Kargo"><span>Ücretsiz Kargo</span>
                     </div>
 
-                    <a href="javascript:" class="card__basket">
+                    <a href="javascript:" class="card__basket" onclick="addBasket(event)">
                       Sepete Ekle
                     </a>
                   </div>
@@ -74,7 +74,7 @@
                     <div class="card__cargo"><img src="assets/images/icons/cargo.svg" alt="Hızlı Kargo"><span>Ücretsiz Kargo</span>
                     </div>
 
-                    <a href="javascript:" class="card__basket">
+                    <a href="javascript:" class="card__basket" onclick="addBasket(event)">
                       Sepete Ekle
                     </a>
                   </div>
@@ -97,7 +97,7 @@
                     <div class="card__cargo"><img src="assets/images/icons/cargo.svg" alt="Hızlı Kargo"><span>Ücretsiz Kargo</span>
                     </div>
 
-                    <a href="javascript:" class="card__basket">
+                    <a href="javascript:" class="card__basket" onclick="addBasket(event)">
                       Sepete Ekle
                     </a>
                   </div>
@@ -120,7 +120,7 @@
                     <div class="card__cargo"><img src="assets/images/icons/cargo.svg" alt="Hızlı Kargo"><span>Ücretsiz Kargo</span>
                     </div>
 
-                    <a href="javascript:" class="card__basket">
+                    <a href="javascript:" class="card__basket" onclick="addBasket(event)">
                       Sepete Ekle
                     </a>
                   </div>
@@ -143,7 +143,7 @@
                     <div class="card__cargo"><img src="assets/images/icons/cargo.svg" alt="Hızlı Kargo"><span>Ücretsiz Kargo</span>
                     </div>
 
-                    <a href="javascript:" class="card__basket">
+                    <a href="javascript:" class="card__basket" onclick="addBasket(event)">
                       Sepete Ekle
                     </a>
                   </div>
@@ -159,6 +159,27 @@
     </div>
     <!-- /tab -->
   </div>
+
+  <!-- notification -->
+  <div class="notification" id="notificationBar">
+    <div class="notification__check">
+      <img src="assets/images/icons/check.svg" alt="Check">
+    </div>
+
+    <div class="notification__info">
+      <h3 class="notification__title">
+        Ürün sepete eklendi.
+      </h3>
+      <a href="javascript:" class="notification__basket">
+        Sepete Git
+      </a>
+    </div>
+
+    <a href="javascript:" class="notification__close" onclick="closeBasket()">
+      <img src="assets/images/icons/close.svg" alt="Close">
+    </a>
+  </div>
+  <!-- /notification -->
 </main>
 
 <script src="assets/lib/lozad.min.js"></script>

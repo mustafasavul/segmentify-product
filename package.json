@@ -16,6 +16,6 @@
     "gulp-usemin": "^0.3.30"
   },
   "dependencies": {
-    "bootstrap": "^5.1.3"
+    "bootstrap": "^4.6.0"
   }
 }

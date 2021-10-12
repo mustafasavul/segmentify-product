@@ -1,12 +1,17 @@
 .notification {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: space-between;
-  padding: 15px;
-  height: 90px;
+  padding: 10px;
+  height: 70px;
   background: #1c232a;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0, rgba(0, 0, 0, 0.06) 0 1px 2px 0;
+
+  @include atLarge {
+    padding: 15px;
+    height: 90px
+  }
 
   &__check {
     margin-right: 20px;
@@ -24,11 +29,21 @@
   &__title {
     color: #FFF;
     font-weight: normal;
+    font-size: .95em;
+
+    @include atLarge {
+      font-size: 1.2em;
+    }
   }
 
   &__basket {
     color: #65a8ff;
     text-decoration: none;
+    font-size: .90em;
+
+    @include atLarge {
+      font-size: 1.1em;
+    }
   }
 
   &__close {
@@ -36,6 +51,21 @@
 
     img {
       width: 30px;
+    }
+  }
+
+  &--active {
+    display: flex;
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 10;
+    width: 100%;
+    max-width: 320px;
+
+    @include atLarge {
+      max-width: 500px;
     }
   }
 }

@@ -38,7 +38,9 @@ fetchText().then((resp) => {
 
     document.getElementById('userCategories').appendChild(nav);
   })
-}).catch(err => { console.log(err) });
+}).catch(err => {
+  console.log(err)
+});
 
 const sliderTemplate = ''
 const filterCategoryName = [];
@@ -65,21 +67,20 @@ function getNavItem(event) {
       let card = `
              <div class="swiper-slide">
               <div class="card">
-              <div class="card__image">
+              <div>
+                   <div class="card__image">
                 <img src="${value.image}" data-src="${value.image}" alt="${value.name.slice(0, 25)}">
 
               </div>
-
+              <h2 class="card__title">${value.name}</h2>
+                </div>
               <div class="card__info">
-                <h2 class="card__title">${value.name}</h2>
-
                 <div class="card__price">
                   ${value.priceText}
                 </div>
-
               ${value.params.shippingFee === "FREE" ? freeCargo : ''}
 
-              <a href="javascript:" class="card__basket">
+             <a href="javascript:" class="card__basket" onclick="addBasket(event)">
               Sepete Ekle
               </a>
               </div>
@@ -95,6 +96,24 @@ function getNavItem(event) {
   })
 }
 
+let bar = document.getElementById('notificationBar');
+
+function addBasket(event) {
+  bar.classList.add('notification--active')
+  //
+  // setTimeout(function () {
+  //   bar.classList.remove('notification--active')
+  // }, 2000)
+}
+
+function closeBasket() {
+  bar.classList.remove('notification--active')
+}
+
+
+/**
+ * Swiper Slider
+ * **/
 const swiper = new Swiper('.swiper', {
   // Optional parameters
   direction: 'horizontal',
